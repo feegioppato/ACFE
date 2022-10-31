@@ -55,3 +55,9 @@ Os índices utilizados se dividiam em 4 categorias:
     
     - Giro do Estoque
 </details>
+
+Na disciplina os cálculos são feitos utilizando o Excel. A proposta deste projeto é desenvolver um pacote na linguagem Python que:
+
+1. Baixe os dados;
+2. Realize os cálculos dos índices;
+3. Plote visualizações básicas.
