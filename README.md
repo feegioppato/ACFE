@@ -55,3 +55,48 @@ Os índices utilizados se dividiam em 4 categorias:
     
     - Giro do Estoque
 </details>
+
+Na disciplina os cálculos são feitos utilizando o Excel. A proposta deste projeto é desenvolver um pacote na linguagem Python que:
+
+1. Baixe os dados necessários;
+2. Realize os cálculos dos índices;
+3. Plote visualizações básicas.
+
+## Pacote
+O pacote será estruturado da seguinte maneira:
+```
+acfe/
+|-- __init__.py
+|
+|-- raspagem
+|  |-- __init__.py
+|
+|-- processamento
+|  |-- __init__.py
+|  |-- processamento.py
+|
+|-- indices
+|  |-- __init__.py
+|  |-- estrutura_de_capital.py
+|  |-- liquidez.py
+|  |-- rentabilidade.py
+|  |-- prazos_medios.py
+|
+|-- vizualizacao
+|  |-- __init__.py
+|  |-- plot.py 
+```
+
+### Raspagem
+A ideia deste subdiretório é conter o(s) script(s) necessário(s) para realizar o download dos arquivos pdf que serão utilizados para construir o conjunto de dados.
+*Atualmente não está em desenvolvimento*.
+
+### Processamento
+Contém o(s) script(s) necessário(s) para extrair os dados do arquivo `.pdf` e consolidá-los em um arquivo `.csv`
+A extração será feita por meio de expressões regulares - ***regex***.
+
+### Índices
+Contém o(s) script(s) necessário(s) para realizar o cálculo dos índices. Cada módulo é responsável pelo cálculo de uma das quatro categorias de índices, e leva o nome de sua categoria.
+
+### Visualização
+Contém o(s) script(s) necessário(s) para visualizar os índices.
