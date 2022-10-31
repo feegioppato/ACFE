@@ -4,56 +4,50 @@ Projeto baseado na disciplina **Análise Contábil e Financeira de Empresas - Ci
 
 Como avaliação da disciplina, nós deveríamos realizar uma Análise Fundamentalista de alguma empresa listada na bolsa de valores B3. A empresa é de escolha do grupo, mas o período de análise deve ser de 3 anos.
 
-Os índices utilizados se dividiam em 5 categorias:
+Os índices utilizados se dividiam em 4 categorias:
 
 <details>
-<summary>- **Estrutura de Capital**</summary>
+<summary>Estrutura de Capital</summary>
+    
     - Participação de Capital de Terceiros
-        
-        Mostra a proporção entre Capital Próprio e Capital de Terceiros na empresa
-        
-        $pct=\frac{Capital\space de\space  Terceiros}{Patrimônio \space Líquido}$
-        <details>
+    
     - Composição do Endividamento
         
-        -
-        
-        $ce=\frac{Passivo\space Circulante}{Passivo\space Total}$
-        
-    - Imobilização do Patrimônio Líquido
-        
-        -
-        
-        $ipl=\frac{Ativo\space Não\space  Circulante - Ativo\space Realizável\space a\space Longo\space Prazo}{Patrimônio\space Líquido}$
+    - Imobilização do Patrimônio Líquido  
         
     - Capital Circulante Próprio (CCP)
         
-        -
-        
-        $ccp=Patrimônio\space Líquido - Ativo\space Não\space Circulante$
-        
     - Capital Circulante Líquido (CCL)
-        
-        -
-        
-        $ccl = (Patrimônio\space Líquido + Passivo\space Não\space Circulante)-Ativo\space Não\space Circulante$
-        
+            
     - Imobilização de Recursos Não Corrente
-        
-        $irnc=\frac{Ativo\space Não\space Circulante - Ativo\space Realizável\space a\space Longo\space Prazo}{Patrimônio\space Líquido + Passivo\space não\space Circulante}$
-        
-- **Liquidez**
+</details>
+
+<details>
+<summary>Liquidez</summary>
+    
     - Liquidez Geral
+    
     - Liquidez Corrente
+    
     - Liquidez Seca
-- **Rentabilidade**
+</details>
+
+<details>
+<summary>Rentabilidade</summary>
+    
     - Giro do Ativo
+    
     - Margem Líquida
+    
     - Rentabilidade do Ativo (ROA)
+    
     - Rentabilidade do Patrimônio Líquido (ROE)
-- **Prazos Médios**
+</details>
+
+<details>
+<summary>Prazos Médios</summary>
     - Prazo Médio de Recebimento de Vendas (PMRV)
     - Prazo Médio de Pagamento de Contas (PMPC)
     - Prazo Médio de Renovação de Estoques (PMRE)
     - Giro do Estoque
-- **Avaliação Econômica**
+</details>
