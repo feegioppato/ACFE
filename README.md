@@ -46,8 +46,12 @@ Os índices utilizados se dividiam em 4 categorias:
 
 <details>
 <summary>Prazos Médios</summary>
+
     - Prazo Médio de Recebimento de Vendas (PMRV)
+    
     - Prazo Médio de Pagamento de Contas (PMPC)
+    
     - Prazo Médio de Renovação de Estoques (PMRE)
+    
     - Giro do Estoque
 </details>
