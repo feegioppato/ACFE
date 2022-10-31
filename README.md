@@ -64,7 +64,7 @@ Na disciplina os cálculos são feitos utilizando o Excel. A proposta deste proj
 
 ## Pacote
 O pacote será estruturado da seguinte maneira:
-`
+```
 acfe/
 |-- __init__.py
 |-- raspagem
@@ -78,6 +78,6 @@ acfe/
 |  |-- liquidez.py
 |  |-- rentabilidade.py
 |  |-- prazos_medios.py
-`
+```
 
 
