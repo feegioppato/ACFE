@@ -58,6 +58,26 @@ Os índices utilizados se dividiam em 4 categorias:
 
 Na disciplina os cálculos são feitos utilizando o Excel. A proposta deste projeto é desenvolver um pacote na linguagem Python que:
 
-1. Baixe os dados;
+1. Baixe os dados necessários;
 2. Realize os cálculos dos índices;
 3. Plote visualizações básicas.
+
+## Pacote
+O pacote será estruturado da seguinte maneira:
+`
+acfe/
+|-- __init__.py
+|-- raspagem
+|  |--__init__.py
+|-- processamento
+|  |--__init__.py
+|  |-- processamento.py
+|-- indices
+|  |--__init__.py
+|  |-- estrutura_de_capital.py
+|  |-- liquidez.py
+|  |-- rentabilidade.py
+|  |-- prazos_medios.py
+`
+
+
