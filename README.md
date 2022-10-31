@@ -6,13 +6,14 @@ Como avaliação da disciplina, nós deveríamos realizar uma Análise Fundament
 
 Os índices utilizados se dividiam em 5 categorias:
 
-- **Estrutura de Capital**
+<details>
+<summary>- **Estrutura de Capital**</summary>
     - Participação de Capital de Terceiros
         
         Mostra a proporção entre Capital Próprio e Capital de Terceiros na empresa
         
         $pct=\frac{Capital\space de\space  Terceiros}{Patrimônio \space Líquido}$
-        
+        <details>
     - Composição do Endividamento
         
         -
