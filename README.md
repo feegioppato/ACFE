@@ -17,29 +17,29 @@ Os índices utilizados se dividiam em 5 categorias:
         
         -
         
-        $**ce=\frac{Passivo\space Circulante}{Passivo\space Total}**$
+        $ce=\frac{Passivo\space Circulante}{Passivo\space Total}$
         
     - Imobilização do Patrimônio Líquido
         
         -
         
-        $**ipl=\frac{Ativo\space Não\space  Circulante - Ativo\space Realizável\space a\space Longo\space Prazo}{Patrimônio\space Líquido}**$
+        $ipl=\frac{Ativo\space Não\space  Circulante - Ativo\space Realizável\space a\space Longo\space Prazo}{Patrimônio\space Líquido}$
         
     - Capital Circulante Próprio (CCP)
         
         -
         
-        **Cálculo: $ccp=Patrimônio\space Líquido - Ativo\space Não\space Circulante$**
+        $ccp=Patrimônio\space Líquido - Ativo\space Não\space Circulante$
         
     - Capital Circulante Líquido (CCL)
         
         -
         
-        $**ccl = (Patrimônio\space Líquido + Passivo\space Não\space Circulante)-Ativo\space Não\space Circulante**$
+        $ccl = (Patrimônio\space Líquido + Passivo\space Não\space Circulante)-Ativo\space Não\space Circulante$
         
     - Imobilização de Recursos Não Corrente
         
-        $**irnc=\frac{Ativo\space Não\space Circulante - Ativo\space Realizável\space a\space Longo\space Prazo}{Patrimônio\space Líquido + Passivo\space não\space Circulante}**$
+        $irnc=\frac{Ativo\space Não\space Circulante - Ativo\space Realizável\space a\space Longo\space Prazo}{Patrimônio\space Líquido + Passivo\space não\space Circulante}$
         
 - **Liquidez**
     - Liquidez Geral
