@@ -12,20 +12,29 @@ from tika import parser
 import pandas as pd
 
 # Lendo arquivo pdf
-parsed = parser.from_file(r'C:\Users\ferna\Projetos\ACFE\Dados\Demonstrativos Ambev (2017, 2018, 2019).pdf')
+parsed = parser.from_file('./Demonstrativos Ambev (2017, 2018, 2019).pdf')
 
 # Variável com o conteúdo
 text = parsed['content']
 
 # Preparando o documento para extração
 # Deve ser incluida pelo usuário
+#p1 = 'PÁGINA: 2 de 137'
+#p2 = 'PÁGINA: 9 de 137'
+#paginas_interesse = re.search(f"(?<={p1}).*(?={p2})", text, re.DOTALL)
+#paginas_interesse = re.search('(?<=PÁGINA: 2 de 137).*(?=PÁGINA: 9 de 137)', text, re.DOTALL)
+#dados_brutos = paginas_interesse.group(0)
+
+
+
 p1 = 'PÁGINA: 2 de 137'
 p2 = 'PÁGINA: 9 de 137'
-paginas_interesse = re.search(f"(?<={p1}).*(?={p2})", text, re.DOTALL)
-#paginas_interesse = re.search('(?<=PÁGINA: 2 de 137).*(?=PÁGINA: 9 de 137)', text, re.DOTALL)
-dados_brutos = paginas_interesse.group(0)
 
-
+def teste(x, y):
+    paginas_interesse = re.search(f"(?<={x}).*(?={y})", text, re.DOTALL)
+    #paginas_interesse = re.search('(?<=PÁGINA: 2 de 137).*(?=PÁGINA: 9 de 137)', text, re.DOTALL)
+    dados_brutos = paginas_interesse.group(0)
+    return dados_brutos
 
 # Expressão Regular para extrair dados
 pattern = r'''

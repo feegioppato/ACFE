@@ -12,7 +12,7 @@ import pandas as pd
 
 # NÃO ESTÁ FUNCIONANDO
 
-def read_pdf(filepath, page_1, page_2):
+def read_pdf(filepath, start, end):
     
     parsed = parser.from_file(filepath)
     print('parser ok')
@@ -20,7 +20,7 @@ def read_pdf(filepath, page_1, page_2):
     raw_text = parsed['content']
     print('raw text ok')  
     
-    interest_pages = re.search(f'(?<={page_1}).*(?={page_2})', raw_text, re.DOTALL) 
+    interest_pages = re.search(f"(?<={start}).*(?={end})", raw_text, re.DOTALL) 
     # erro provavelmente nesta linha
     print('interest pages ok')
     
@@ -43,6 +43,6 @@ def read_pdf(filepath, page_1, page_2):
     # Transformando saída em um dataframe
     df = pd.DataFrame(resultados)
 
-    return interest_pages
+    return df
 
 
