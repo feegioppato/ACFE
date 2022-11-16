@@ -10,4 +10,4 @@ import re
 import os
 import tika
 from tika import parser
-from .data_extractor import read_pdf
+import data_extractor
