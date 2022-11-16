@@ -27,8 +27,8 @@ class Extractor:
         return self.content
 
     def unstructured_data(self):
-        pattern = re.compile(f"(?<={self.startpoint}).*(?={self.endpoint})", re.DOTALL)
-        search_object = re.search(pattern, self.raw_content())
+        trim_pattern = re.compile(f"(?<={self.startpoint}).*(?={self.endpoint})", re.DOTALL)
+        search_object = re.search(trim_pattern, self.raw_content())
         return search_object.group(0)
     
     def data(self):
@@ -46,13 +46,13 @@ class Extractor:
             (results_dict).append(match.groupdict())
         
         self.structured_data = pd.DataFrame(results_dict)
+        self.structured_data.iloc[:, -3:] = self.data_prep(self.structured_data.iloc[:, -3:])
         
         return self.structured_data
         
-    def data_prep(self):
+    def data_prep(self, x):
         
-        
-        
+        return round(x.replace(['\.', ','], ['', '.'], regex = True).astype(float), 3)
 
 
 
