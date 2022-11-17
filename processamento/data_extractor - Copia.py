@@ -11,30 +11,27 @@ from tika import parser
 import pandas as pd
 
 
-class Extractor:
+class TESTExtractor:
     
     def __init__(self, filepath, s, e, years):
         self.filepath = filepath
         self.startpoint = s
         self.endpoint = e
         self.listofyears = years
-        
+
     
     def _read_file(self):
         self.parsed = parser.from_file(self.filepath)
         return self.parsed
     
-    
     def _raw_content(self):
         self.content = (self._read_file())['content']
         return self.content
-    
 
     def _unstructured_data(self):
         self.trim_pattern = re.compile(f"(?<={self.startpoint}).*(?={self.endpoint})", re.DOTALL|re.IGNORECASE)
-        search_object = (self.trim_pattern).search(self._raw_content())
+        search_object = self.trim_pattern.search(self._raw_content())
         return search_object.group(0)
-    
     
     def _data(self):
         pattern = r'''
@@ -44,7 +41,7 @@ class Extractor:
         (?P<segundo_ano>-?\d{1,3},?(?:,?\.?\d{1,3})*)*\s
         (?P<terceiro_ano>-?\d{1,3}(?:,?\.?\d{1,3})*)'''
         
-        p = re.compile(pattern, re.X)
+        p = re.compile(pattern, re.X|re.UNICODE)
         
         results_dict = []
         for match in re.finditer(p, self._unstructured_data()):
@@ -60,14 +57,12 @@ class Extractor:
         
         return self.structured_data
         
-    
     def _column_names(self, x):
         
        return x.rename({'primeiro_ano' : self.listofyears[0],
                         'segundo_ano' : self.listofyears[1],
                         'terceiro_ano' : self.listofyears[2]},
-                        axis = 1)    
-            
+                        axis = 1)
         
     def _data_convertion(self, x):
         
