@@ -62,6 +62,8 @@ Na disciplina os cálculos são feitos utilizando o Excel. A proposta deste proj
 2. Realize os cálculos dos índices;
 3. Plote visualizações básicas.
 
+***O INTÚITO DESDE PROJETO É PARA FINS EDUCACIONAIS, E NÃO PARA SER UTILIZADO COMO AUXÍLIO NA DISCIPLINA MENCIONADA.***
+
 ## Pacote
 O pacote será estruturado da seguinte maneira:
 ```
