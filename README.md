@@ -58,7 +58,7 @@ Os índices utilizados se dividiam em 4 categorias:
 
 Na disciplina os cálculos são feitos utilizando o Excel. A proposta deste projeto é desenvolver um pacote na linguagem Python que:
 
-1. Baixe os dados necessários;
+1. Extraia os dados dos Demonstrativos Financeiros das empresas;
 2. Realize os cálculos dos índices;
 3. Plote visualizações básicas.
 
@@ -67,9 +67,6 @@ O pacote será estruturado da seguinte maneira:
 ```
 acfe/
 |-- __init__.py
-|
-|-- raspagem
-|  |-- __init__.py
 |
 |-- processamento
 |  |-- __init__.py
@@ -86,10 +83,6 @@ acfe/
 |  |-- __init__.py
 |  |-- plot.py 
 ```
-
-### Raspagem
-A ideia deste subdiretório é conter o(s) script(s) necessário(s) para realizar o download dos arquivos pdf que serão utilizados para construir o conjunto de dados.
-*Atualmente não está em desenvolvimento*.
 
 ### Processamento
 Contém o(s) script(s) necessário(s) para extrair os dados do arquivo `.pdf` e consolidá-los em um arquivo `.csv`
