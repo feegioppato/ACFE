@@ -10,4 +10,3 @@ import re
 import os
 import tika
 from tika import parser
-import data_extractor
