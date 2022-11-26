@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 """
 Created on Mon Nov  7 11:18:34 2022
 
@@ -36,7 +36,7 @@ class Extractor:
         return search_object.group(0)
     
     
-    def _data(self):
+    def _string_data(self):
         pattern = r'''
         (?P<numero_conta>\d(?:\.\d{1,2})*)\s
         (?P<nome_conta>(?:[a-zA-Zâãõçíó\-\)\(]+\s)+)
@@ -53,8 +53,8 @@ class Extractor:
         return results_dict
       
         
-    def final_data(self):
-        self.structured_data = pd.DataFrame(self._data())
+    def _data(self):
+        self.structured_data = pd.DataFrame(self._string_data())
         self.structured_data.iloc[:, -3:] = self._data_convertion(self.structured_data.iloc[:, -3:])
         self.structured_data = self._column_names(self.structured_data)
         

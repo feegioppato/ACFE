@@ -1,2 +1,5 @@
 *.ipynb
 *.zip
+build/
+dist/
+acfe.egg-info/
