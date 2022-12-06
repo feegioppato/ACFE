@@ -13,11 +13,11 @@ import pandas as pd
 
 class Extractor:
     
-    def __init__(self, filepath, s, e, years):
+    def __init__(self, filepath, s, e, anos):
         self.filepath = filepath
         self.startpoint = s
         self.endpoint = e
-        self.listofyears = years
+        self.listofyears = anos
         
     
     def _read_file(self):
@@ -31,18 +31,19 @@ class Extractor:
     
 
     def _unstructured_data(self):
-        self.trim_pattern = re.compile(f"(?<={self.startpoint}).*(?={self.endpoint})", re.DOTALL|re.IGNORECASE)
-        search_object = (self.trim_pattern).search(self._raw_content())
+        trim_pattern = re.compile(f"(?<={self.startpoint}).*(?={self.endpoint})", re.DOTALL|re.IGNORECASE)
+        search_object = (trim_pattern).search(self._raw_content())
         return search_object.group(0)
+    
     
     
     def _string_data(self): # regex não captura linhas com (), /, -, etc.
         pattern = r'''
         (?P<cd>\d(?:\.\d{1,2})*)\s
-        (?P<nc>(?:[a-zA-Zâãõçíóôá\-\(\)]+\s)+)
-        (?P<primeiro_ano>-?\d{1,3},?(?:,?\.?\d{1,3})*)*\s
+        (?P<nc>(?:[a-zA-Z\u00C0-\u00ff]+\s)+)
+        (?P<terceiro_ano>-?\d{1,3},?(?:,?\.?\d{1,3})*)*\s
         (?P<segundo_ano>-?\d{1,3},?(?:,?\.?\d{1,3})*)*\s
-        (?P<terceiro_ano>-?\d{1,3}(?:,?\.?\d{1,3})*)'''
+        (?P<primeiro_ano>-?\d{1,3}(?:,?\.?\d{1,3})*)'''
         
         p = re.compile(pattern, re.X)
         
@@ -64,9 +65,9 @@ class Extractor:
     
     def _column_names(self, x):
         
-       return x.rename({'primeiro_ano' : self.listofyears[0],
+       return x.rename({'terceiro_ano' : self.listofyears[0],
                         'segundo_ano' : self.listofyears[1],
-                        'terceiro_ano' : self.listofyears[2]},
+                        'primeiro_ano' : self.listofyears[2]},
                         axis = 1)    
             
         

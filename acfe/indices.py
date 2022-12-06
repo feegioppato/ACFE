@@ -5,19 +5,18 @@ Created on Wed Nov 23 14:14:41 2022
 @author: Fernando Gioppato
 """
 from extracao import Extractor
+import pandas as pd
 
 
-class Indicadores(Extractor):
+class _Indicadores(Extractor):
         
-    def __init__(self, filepath, s, e, years):
+    def __init__(self, filepath, s, e, anos):
         
-        Extractor.__init__(self, filepath, s, e, years)
+        Extractor.__init__(self, filepath, s, e, anos)
         self.data = self._data()
 
-
     # Estrutura de Capital
-        
-    def pct(self):
+    def _pct(self):
         
         x1 = self.data.loc['2.01', self.listofyears]
         x2 = self.data.loc['2.02', self.listofyears]
@@ -26,9 +25,8 @@ class Indicadores(Extractor):
         self._pct = ( (x1+x2) / x3 ) * 100                                                                  
         
         return self._pct
-
     
-    def ce(self):
+    def _ce(self):
         
         x1 = self.data.loc['2.01', self.listofyears]
         x2 = self.data.loc['2.02', self.listofyears]
@@ -37,8 +35,7 @@ class Indicadores(Extractor):
         
         return self._ce
     
-    
-    def ipl(self):
+    def _ipl(self):
     
         x1 = self.data.loc['1.02', self.listofyears]
         x2 = self.data.loc['1.01.02', self.listofyears]
@@ -48,8 +45,7 @@ class Indicadores(Extractor):
         
         return self._ipl
 
-
-    def ccp(self):
+    def _ccp(self):
     
         x1 = self.data.loc['2.03', self.listofyears]
         x2 = self.data.loc['1.02', self.listofyears]
@@ -58,8 +54,7 @@ class Indicadores(Extractor):
     
         return self._ccp
 
-
-    def ccl(self):
+    def _ccl(self):
     
         x1 = self.data.loc['2.02', self.listofyears]
         x2 = self.data.loc['2.03', self.listofyears]
@@ -69,8 +64,7 @@ class Indicadores(Extractor):
         
         return self._ccl
 
-
-    def irnc(self):    
+    def _irnc(self):    
     
         x1 = self.data.loc['1.02', self.listofyears]
         x2 = self.data.loc['1.02.01', self.listofyears]
@@ -82,9 +76,8 @@ class Indicadores(Extractor):
         return self._irnc
     
 
-    # Liquidez    
-    
-    def lg(self):
+    # Liquidez        
+    def _lg(self):
     
         x1 = self.data.loc['1.01', self.listofyears]
         x2 = self.data.loc['1.02.01', self.listofyears]
@@ -95,8 +88,7 @@ class Indicadores(Extractor):
         
         return self._lg
 
-
-    def lc(self):
+    def _lc(self):
 
         x1 = self.data.loc['1.01', self.listofyears]
         x2 = self.data.loc['2.01', self.listofyears]
@@ -105,8 +97,7 @@ class Indicadores(Extractor):
         
         return self._lc
 
-
-    def ls(self):
+    def _ls(self):
 
         x1 = self.data.loc['1.01', self.listofyears]
         x2 = self.data.loc['1.01.04', self.listofyears]
@@ -128,7 +119,6 @@ class Indicadores(Extractor):
 
         return self._pmrv
     
-
     def _pmpc(self): # errado: variável c deve ser defasada em um ano
     
         x1 = self.data.loc['2.01.02', self.listofyears]
@@ -136,10 +126,9 @@ class Indicadores(Extractor):
         x3 = self.data.loc['1.01.04', self.listofyears]
         c1 = self.data.loc['1.01.04', self.listofyears]
         
-        self._pmpc = x1 / ( (x2-c1+x3) / 360 )
+        self._pmpc = x1 / ( (x2-c1+x3)  / 360 )
         
         return self._pmpc
-
 
     def _pmre(self): # erro regex não capturou linha (3.02)
     
@@ -149,7 +138,6 @@ class Indicadores(Extractor):
         self._pmre = x1 / (x2 / 360)
         
         return self._pmre
-
 
     def _ge(self): # erro regex não capturou linha (3.02)
 
@@ -177,7 +165,6 @@ class Indicadores(Extractor):
                 
         return self._ml
 
-
     def _roa(self):
     
         x1 = self.data.loc['3.11', self.listofyears]
@@ -187,20 +174,106 @@ class Indicadores(Extractor):
         
         return self._roa
 
-
-
     def _roe(self): # errado: variável 'c' deve ser defasada em 01 ano
     
         x1 = self.data.loc['3.11', self.listofyears]
         x2 = self.data.loc['2.03', self.listofyears]
-        c1 = self.data.lloc['2.03', self.listofyears]
+        c1 = self.data.loc['2.03', self.listofyears]
         
         self._roe = ( x1 / ( (x2 + c1) / 2 ) ) * 100
        
         return self._roe
 
       
+    
+     
+class Indicadores(_Indicadores):
+    
+    
+    def __init__(self, filepath, s, e, anos):
+      
+        super().__init__(filepath, s, e, anos)
+                          
+        
+    
+
+    def _to_df(self, idx, val):
+         
+         df = pd.DataFrame(data = val, index = idx, columns = self.listofyears)
+         
+         return df
+
+        
+                    
+    def estrututa_de_capital(self):
+        
+        idx = ['Participação de Cappital de Terceiros', 
+               'Composição do Endividamento',
+               'Imobilização do Patrimônio Líquido',
+               'Capital Circulante Próprio',
+               'Capital Circulante Líquido',
+               'Imobilização de Recursos Não Correntes']
+    
+
+        data = self._to_df( idx = idx, val = [self._pct(),
+                                               self._ce(),
+                                               self._ipl(),
+                                               self._ccp(),
+                                               self._ccl(),
+                                               self._irnc()] )
+
+        
+        return data
+        
+    
+    def liquidez(self):
+        
+        idx = ['Liquidez Geral',
+               'Liquidez Corrente',
+               'Liquidez Seca']
+        
+        data = self._to_df( idx = idx, val = [self._lg(),
+                                              self._lc(),
+                                              self._ls()] )
+        
+        return data
+
+    def prazos_medios(self):
+        
+        idx = ['Prazo Médio de Recebimento de Vendas',
+               'Prazo Médio de Pagamento de Contas', 
+               'Prazo Médio de Renovação de Estoques',
+               'Giro do Estoque']
+# funções não estão funcionando corretamente    
+# =============================================================================
+#         data = self._to_df (idx = idx, val = [self._pmrv(),
+#                                               self._pmpc(),
+#                                               self._pmre(),
+#                                               self._ge()])
+#         
+#         return data
+# =============================================================================
+        pass
+    
+    def rentabilidade(self):
+        
+        idx = ['Giro do Ativo', 
+               'Margem Líquida',
+               'Rentabilidade do Ativo (ROA)',
+               'Rentabilidade do Patrimônio Líquido (ROE)']
+# funções não estão funcionando corretamente       
+# =============================================================================
+#         data = self._to_df(idx = idx, val = [self._ga(),
+#                                              self._ml(),
+#                                              self._roa(),
+#                                              self._roe()])
+#         
+#         return data
+# =============================================================================
+    
+    
+        pass
+    
         
     
     
-        
