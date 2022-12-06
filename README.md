@@ -70,20 +70,12 @@ O pacote será estruturado da seguinte maneira:
 acfe/
 |-- __init__.py
 |
-|-- processamento
-|  |-- __init__.py
-|  |-- processamento.py
+|-- extracao.py
 |
-|-- indices
-|  |-- __init__.py
-|  |-- estrutura_de_capital.py
-|  |-- liquidez.py
-|  |-- rentabilidade.py
-|  |-- prazos_medios.py
+|-- indices.py
 |
-|-- vizualizacao
-|  |-- __init__.py
-|  |-- plot.py 
+|-- viz.py
+|
 ```
 
 ### Processamento
