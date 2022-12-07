@@ -19,7 +19,7 @@ Os índices utilizados se dividiam em 4 categorias:
         
     - Capital Circulante Líquido (CCL)
             
-    - Imobilização de Recursos Não Corrente
+    - Imobilização de Recursos Não Correntes
 </details>
 
 <details>
