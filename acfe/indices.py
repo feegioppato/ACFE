@@ -119,18 +119,18 @@ class _Indicadores(Extractor):
 
         return self._pmrv
     
-    def _pmpc(self): # errado: variável c deve ser defasada em um ano
+    def _pmpc(self):
     
         x1 = self.data.loc['2.01.02', self.listofyears]
         x2 = self.data.loc['3.02', self.listofyears] * -1
         x3 = self.data.loc['1.01.04', self.listofyears]
-        c1 = self.data.loc['1.01.04', self.listofyears]
+        c1 = self.data.loc['1.01.04', self.listofyears].shift(-1)
         
         self._pmpc = x1 / ( (x2-c1+x3)  / 360 )
         
         return self._pmpc
 
-    def _pmre(self): # erro regex não capturou linha (3.02)
+    def _pmre(self):
     
         x1 = self.data.loc['1.01.04', self.listofyears]
         x2 = self.data.loc['3.02', self.listofyears] * -1
@@ -139,16 +139,16 @@ class _Indicadores(Extractor):
         
         return self._pmre
 
-    def _ge(self): # erro regex não capturou linha (3.02)
+    def _ge(self):
 
-        self._ge = 360 / self.pmre()
+        self._ge = 360 / self._pmre
 
         return self._ge
     
     
     # Rentabilidade
     
-    def _ga(self): # erro: regex ão capturou linha (3.01)
+    def _ga(self):
     
         x1 = self.data.loc['3.01', self.listofyears]
         x2 = self.data.loc['1', self.listofyears]
@@ -157,7 +157,7 @@ class _Indicadores(Extractor):
         
         return self._ga
 
-    def _ml(self): # erro: regex não capturou linha (3.01)
+    def _ml(self):
     
         x1 = self.data.loc['3.11', self.listofyears]
         x2 = self.data.loc['3.01', self.listofyears]
@@ -168,17 +168,17 @@ class _Indicadores(Extractor):
     def _roa(self):
     
         x1 = self.data.loc['3.11', self.listofyears]
-        x2 = self.data.loc['1', self.lisfotyears]
+        x2 = self.data.loc['1', self.listofyears]
         self._roa = ( x1 / x2 ) * 100
 
         
         return self._roa
 
-    def _roe(self): # errado: variável 'c' deve ser defasada em 01 ano
+    def _roe(self):
     
         x1 = self.data.loc['3.11', self.listofyears]
         x2 = self.data.loc['2.03', self.listofyears]
-        c1 = self.data.loc['2.03', self.listofyears]
+        c1 = self.data.loc['2.03', self.listofyears].shift(-1)
         
         self._roe = ( x1 / ( (x2 + c1) / 2 ) ) * 100
        
@@ -205,7 +205,7 @@ class Indicadores(_Indicadores):
 
         
                     
-    def estrututa_de_capital(self):
+    def estrutura_de_capital(self):
         
         idx = ['Participação de Cappital de Terceiros', 
                'Composição do Endividamento',
@@ -244,16 +244,15 @@ class Indicadores(_Indicadores):
                'Prazo Médio de Pagamento de Contas', 
                'Prazo Médio de Renovação de Estoques',
                'Giro do Estoque']
-# funções não estão funcionando corretamente    
-# =============================================================================
-#         data = self._to_df (idx = idx, val = [self._pmrv(),
-#                                               self._pmpc(),
-#                                               self._pmre(),
-#                                               self._ge()])
-#         
-#         return data
-# =============================================================================
-        pass
+
+        data = self._to_df (idx = idx, val = [self._pmrv(),
+                                              self._pmpc(),
+                                              self._pmre(),
+                                              self._ge()])
+         
+        return data
+
+        
     
     def rentabilidade(self):
         
@@ -261,19 +260,13 @@ class Indicadores(_Indicadores):
                'Margem Líquida',
                'Rentabilidade do Ativo (ROA)',
                'Rentabilidade do Patrimônio Líquido (ROE)']
-# funções não estão funcionando corretamente       
-# =============================================================================
-#         data = self._to_df(idx = idx, val = [self._ga(),
-#                                              self._ml(),
-#                                              self._roa(),
-#                                              self._roe()])
-#         
-#         return data
-# =============================================================================
-    
-    
-        pass
-    
+
+
+        data = self._to_df(idx = idx, val = [self._ga(),
+                                             self._ml(),
+                                             self._roa(),
+                                             self._roe()])
         
-    
+        return data
+
     

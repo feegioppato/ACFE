@@ -40,7 +40,7 @@ class Extractor:
     def _string_data(self): # regex não captura linhas com (), /, -, etc.
         pattern = r'''
         (?P<cd>\d(?:\.\d{1,2})*)\s
-        (?P<nc>(?:[a-zA-Z\u00C0-\u00ff]+\s)+)
+        (?P<nc>(?:[a-zA-Z\u00C0-\u00ff/()\-]+\s)+)
         (?P<terceiro_ano>-?\d{1,3},?(?:,?\.?\d{1,3})*)*\s
         (?P<segundo_ano>-?\d{1,3},?(?:,?\.?\d{1,3})*)*\s
         (?P<primeiro_ano>-?\d{1,3}(?:,?\.?\d{1,3})*)'''
