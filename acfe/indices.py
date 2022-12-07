@@ -270,3 +270,16 @@ class Indicadores(_Indicadores):
         return data
 
     
+
+    def todos(self):
+        
+        est = self.estrutura_de_capital()
+        liq = self.liquidez()
+        prm = self.prazos_medios()
+        rent = self.rentabilidade()
+        
+        data = pd.concat([est, liq, prm, rent], axis = 0)
+        
+        return data
+        
+        
