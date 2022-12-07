@@ -56,7 +56,7 @@ Os índices utilizados se dividiam em 4 categorias:
     - Giro do Estoque
 </details>
 
-Na disciplina os cálculos são feitos utilizando o Excel. A proposta deste projeto é desenvolver um pacote na linguagem Python que:
+Na disciplina tannto os cálculos quanto a 'extração' dos dados são feitos de maneira manual, utilizando o Excel. A proposta deste projeto é desenvolver um pacote na linguagem Python que:
 
 1. Extraia os dados dos Demonstrativos Financeiros das empresas;
 2. Realize os cálculos dos índices;
@@ -77,11 +77,11 @@ acfe/
 ```
 
 ### Processamento
-Contém o(s) script(s) necessário(s) para extrair os dados do arquivo `.pdf` e consolidá-los em um arquivo `.csv`
+Contém o(s) script(s) necessário(s) para extrair os dados do arquivo `.pdf` e consolidá-los no formato de um `pd.DataFrame`.
 A extração será feita por meio de expressões regulares - ***regex***.
 
 ### Índices
-Contém o(s) script(s) necessário(s) para realizar o cálculo dos índices. Cada módulo é responsável pelo cálculo de uma das quatro categorias de índices, e leva o nome de sua categoria.
+Contém o script necessário para realizar o cálculo dos índices. Cada módulo é responsável pelo cálculo de uma das quatro categorias de índices, e leva o nome de sua categoria.
 
 ### Visualização
-Contém o(s) script(s) necessário(s) para visualizar os índices.
+Contém o script necessário para visualizar os índices.
