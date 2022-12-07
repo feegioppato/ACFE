@@ -73,8 +73,7 @@ acfe/
 |
 |-- indices.py
 |
-|-- viz.py
-|
+|-- visualizacao.py
 ```
 
 ### Processamento
