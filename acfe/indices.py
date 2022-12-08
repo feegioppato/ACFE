@@ -22,18 +22,18 @@ class _Indicadores(Extractor):
         x2 = self.data.loc['2.02', self.listofyears]
         x3 = self.data.loc['2.03', self.listofyears]
         
-        self._pct = ( (x1+x2) / x3 ) * 100                                                                  
+        self._pct_ = ( (x1+x2) / x3 ) * 100                                                                  
         
-        return self._pct
+        return self._pct_
     
     def _ce(self):
         
         x1 = self.data.loc['2.01', self.listofyears]
         x2 = self.data.loc['2.02', self.listofyears]
         
-        self._ce = ( x1 / (x1+x2) ) * 100
+        self._ce_ = ( x1 / (x1+x2) ) * 100
         
-        return self._ce
+        return self._ce_
     
     def _ipl(self):
     
@@ -41,18 +41,18 @@ class _Indicadores(Extractor):
         x2 = self.data.loc['1.01.02', self.listofyears]
         x3 = self.data.loc['2.03', self.listofyears]
         
-        self._ipl = ( (x1 - x2) / x3 ) * 100
+        self._ipl_ = ( (x1 - x2) / x3 ) * 100
         
-        return self._ipl
+        return self._ipl_
 
     def _ccp(self):
     
         x1 = self.data.loc['2.03', self.listofyears]
         x2 = self.data.loc['1.02', self.listofyears]
         
-        self._ccp = ( x1 - x2 )
+        self._ccp_ = ( x1 - x2 )
     
-        return self._ccp
+        return self._ccp_
 
     def _ccl(self):
     
@@ -60,9 +60,9 @@ class _Indicadores(Extractor):
         x2 = self.data.loc['2.03', self.listofyears]
         x3 = self.data.loc['1.02', self.listofyears]
         
-        self._ccl = ( (x1 + x2) - x3 ) * 100
+        self._ccl_ = ( (x1 + x2) - x3 ) * 100
         
-        return self._ccl
+        return self._ccl_
 
     def _irnc(self):    
     
@@ -71,9 +71,9 @@ class _Indicadores(Extractor):
         x3 = self.data.loc['2.02', self.listofyears]
         x4 = self.data.loc['2.03', self.listofyears]
         
-        self._irnc = ( (x1 - x2) / (x3 + x4) ) * 100
+        self._irnc_ = ( (x1 - x2) / (x3 + x4) ) * 100
         
-        return self._irnc
+        return self._irnc_
     
 
     # Liquidez        
@@ -84,18 +84,18 @@ class _Indicadores(Extractor):
         x3 = self.data.loc['2.01', self.listofyears]
         x4 = self.data.loc['2.02', self.listofyears]
         
-        self._lg = ( (x1 + x2) / (x3 + x4) ) * 100
+        self._lg_ = ( (x1 + x2) / (x3 + x4) ) * 100
         
-        return self._lg
+        return self._lg_
 
     def _lc(self):
 
         x1 = self.data.loc['1.01', self.listofyears]
         x2 = self.data.loc['2.01', self.listofyears]
         
-        self._lc = ( x1 / x2 ) * 100
+        self._lc_ = ( x1 / x2 ) * 100
         
-        return self._lc
+        return self._lc_
 
     def _ls(self):
 
@@ -103,9 +103,9 @@ class _Indicadores(Extractor):
         x2 = self.data.loc['1.01.04', self.listofyears]
         x3 = self.data.loc['2.01', self.listofyears]
         
-        self._ls = ( (x1-x2) / x3) * 100
+        self._ls_ = ( (x1-x2) / x3) * 100
         
-        return self._ls
+        return self._ls_
     
     
     # Prazos Médios
@@ -115,9 +115,9 @@ class _Indicadores(Extractor):
         x1 = self.data.loc['1.01.03.01', self.listofyears]
         x2 = self.data.loc['3.01', self.listofyears] / 360
         
-        self._pmrv = x1 / x2
+        self._pmrv_ = x1 / x2
 
-        return self._pmrv
+        return self._pmrv_
     
     def _pmpc(self):
     
@@ -126,24 +126,24 @@ class _Indicadores(Extractor):
         x3 = self.data.loc['1.01.04', self.listofyears]
         c1 = self.data.loc['1.01.04', self.listofyears].shift(-1)
         
-        self._pmpc = x1 / ( (x2-c1+x3)  / 360 )
+        self._pmpc_ = x1 / ( (x2-c1+x3)  / 360 )
         
-        return self._pmpc
+        return self._pmpc_
 
     def _pmre(self):
     
         x1 = self.data.loc['1.01.04', self.listofyears]
         x2 = self.data.loc['3.02', self.listofyears] * -1
         
-        self._pmre = x1 / (x2 / 360)
+        self._pmre_ = x1 / (x2 / 360)
         
-        return self._pmre
+        return self._pmre_
 
     def _ge(self):
 
-        self._ge = 360 / self._pmre
+        self._ge_ = 360 / self._pmre()
 
-        return self._ge
+        return self._ge_
     
     
     # Rentabilidade
@@ -153,26 +153,26 @@ class _Indicadores(Extractor):
         x1 = self.data.loc['3.01', self.listofyears]
         x2 = self.data.loc['1', self.listofyears]
         
-        self._ga = ( x1 / x2 ) * 100
+        self._ga_ = ( x1 / x2 ) * 100
         
-        return self._ga
+        return self._ga_
 
     def _ml(self):
     
         x1 = self.data.loc['3.11', self.listofyears]
         x2 = self.data.loc['3.01', self.listofyears]
-        self._ml = ( x1 / x2 ) * 100
+        self._ml_ = ( x1 / x2 ) * 100
                 
-        return self._ml
+        return self._ml_
 
     def _roa(self):
     
         x1 = self.data.loc['3.11', self.listofyears]
         x2 = self.data.loc['1', self.listofyears]
-        self._roa = ( x1 / x2 ) * 100
+        self._roa_ = ( x1 / x2 ) * 100
 
         
-        return self._roa
+        return self._roa_
 
     def _roe(self):
     
@@ -180,9 +180,9 @@ class _Indicadores(Extractor):
         x2 = self.data.loc['2.03', self.listofyears]
         c1 = self.data.loc['2.03', self.listofyears].shift(-1)
         
-        self._roe = ( x1 / ( (x2 + c1) / 2 ) ) * 100
+        self._roe_ = ( x1 / ( (x2 + c1) / 2 ) ) * 100
        
-        return self._roe
+        return self._roe_
 
       
     
@@ -216,11 +216,11 @@ class Indicadores(_Indicadores):
     
 
         data = self._to_df( idx = idx, val = [self._pct(),
-                                               self._ce(),
-                                               self._ipl(),
-                                               self._ccp(),
-                                               self._ccl(),
-                                               self._irnc()] )
+                                              self._ce(),
+                                              self._ipl(),
+                                              self._ccp(),
+                                              self._ccl(),
+                                              self._irnc()] )
 
         
         return data
@@ -281,5 +281,3 @@ class Indicadores(_Indicadores):
         data = pd.concat([est, liq, prm, rent], axis = 0)
         
         return data
-        
-        
