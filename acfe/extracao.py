@@ -13,6 +13,30 @@ import pandas as pd
 
 class Extractor:
     
+    """ A class used to extract text data.
+    
+    This class extracts data from financial reports of companies listed on the brazilian stock market (B3).
+    
+    Attributes
+    ----------
+        filepath : string
+            The path to the file used to extract data.
+        
+        s: string
+            First page of the document containing tha data to be extract.
+            Must follow the pattern: 'PÁGINA: x DE y'.
+            ex : 'PÁGINA: 2 DE 137'
+            
+        e: string
+            Last page of the document containing data to be extracted.
+            Must follow the pattern: 'PÁGINA: x DE y'.
+            ex: 'PÁGINA: 9 DE 137'
+            
+        anos: array_like
+            Array-like object containing the years analized.
+    
+    """
+    
     def __init__(self, filepath, s, e, anos):
         
         """ 

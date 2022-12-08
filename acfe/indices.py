@@ -5,18 +5,27 @@ Created on Wed Nov 23 14:14:41 2022
 @author: Fernando Gioppato
 """
 from extracao import Extractor
+import utils
 import pandas as pd
 
 
 class _Indicadores(Extractor):
+    
+    """ Helper class used to calculate each index individually. """
         
     def __init__(self, filepath, s, e, anos):
+        
+        """ Initializes class.
+        
+        Inherits attributes from Extractor parent class and sets the 'data' attribute. """
         
         Extractor.__init__(self, filepath, s, e, anos)
         self.data = self._data()
 
     # Estrutura de Capital
     def _pct(self):
+        
+        """ Private method used to calculate the Participação de Capital de Terceiros index. """
         
         x1 = self.data.loc['2.01', self.listofyears]
         x2 = self.data.loc['2.02', self.listofyears]
@@ -28,6 +37,8 @@ class _Indicadores(Extractor):
     
     def _ce(self):
         
+        """ Private method used to calculate the Composição do Endividamento index. """
+        
         x1 = self.data.loc['2.01', self.listofyears]
         x2 = self.data.loc['2.02', self.listofyears]
         
@@ -36,6 +47,8 @@ class _Indicadores(Extractor):
         return self._ce_
     
     def _ipl(self):
+        
+        """ Private method used to calculate the Imobilização do Patrimônio Líquido index. """
     
         x1 = self.data.loc['1.02', self.listofyears]
         x2 = self.data.loc['1.01.02', self.listofyears]
@@ -46,6 +59,8 @@ class _Indicadores(Extractor):
         return self._ipl_
 
     def _ccp(self):
+        
+        """ Private method used to calculate the Capital Circulante Próprio index. """
     
         x1 = self.data.loc['2.03', self.listofyears]
         x2 = self.data.loc['1.02', self.listofyears]
@@ -55,6 +70,8 @@ class _Indicadores(Extractor):
         return self._ccp_
 
     def _ccl(self):
+        
+        """ Private method used to calculate the Capital Circulante Líquido index. """
     
         x1 = self.data.loc['2.02', self.listofyears]
         x2 = self.data.loc['2.03', self.listofyears]
@@ -65,6 +82,8 @@ class _Indicadores(Extractor):
         return self._ccl_
 
     def _irnc(self):    
+    
+        """ Private method used to calculate the Imobilização de Recursos Não Correntes index. """    
     
         x1 = self.data.loc['1.02', self.listofyears]
         x2 = self.data.loc['1.02.01', self.listofyears]
@@ -78,6 +97,8 @@ class _Indicadores(Extractor):
 
     # Liquidez        
     def _lg(self):
+        
+        """ Private method used to calculate the Liquidez Geral index. """
     
         x1 = self.data.loc['1.01', self.listofyears]
         x2 = self.data.loc['1.02.01', self.listofyears]
@@ -90,6 +111,8 @@ class _Indicadores(Extractor):
 
     def _lc(self):
 
+        """ Private method used to calculate the Liquidez Corrente index. """            
+
         x1 = self.data.loc['1.01', self.listofyears]
         x2 = self.data.loc['2.01', self.listofyears]
         
@@ -99,6 +122,8 @@ class _Indicadores(Extractor):
 
     def _ls(self):
 
+        """ Private method used to calculate the Liquidez Seca index. """
+    
         x1 = self.data.loc['1.01', self.listofyears]
         x2 = self.data.loc['1.01.04', self.listofyears]
         x3 = self.data.loc['2.01', self.listofyears]
@@ -111,6 +136,8 @@ class _Indicadores(Extractor):
     # Prazos Médios
     
     def _pmrv(self):
+        
+        """ Private method used to calculate the Prazo Médio de Recebimento de Vendas index. """
     
         x1 = self.data.loc['1.01.03.01', self.listofyears]
         x2 = self.data.loc['3.01', self.listofyears] / 360
@@ -120,6 +147,8 @@ class _Indicadores(Extractor):
         return self._pmrv_
     
     def _pmpc(self):
+        
+        """ Private method used to calculate the Prazo Médio de Pagamento de Contas index. """
     
         x1 = self.data.loc['2.01.02', self.listofyears]
         x2 = self.data.loc['3.02', self.listofyears] * -1
@@ -131,6 +160,8 @@ class _Indicadores(Extractor):
         return self._pmpc_
 
     def _pmre(self):
+        
+        """ Private method used to calculate the Prazo Médio de Renovação dos Estoques index. """
     
         x1 = self.data.loc['1.01.04', self.listofyears]
         x2 = self.data.loc['3.02', self.listofyears] * -1
@@ -140,6 +171,8 @@ class _Indicadores(Extractor):
         return self._pmre_
 
     def _ge(self):
+        
+        """ Private method used to calculate the Giro do Estoque index. """
 
         self._ge_ = 360 / self._pmre()
 
@@ -149,6 +182,8 @@ class _Indicadores(Extractor):
     # Rentabilidade
     
     def _ga(self):
+        
+        """ Private method used to calculate the Giro do Ativo index. """
     
         x1 = self.data.loc['3.01', self.listofyears]
         x2 = self.data.loc['1', self.listofyears]
@@ -158,6 +193,8 @@ class _Indicadores(Extractor):
         return self._ga_
 
     def _ml(self):
+        
+        """ Private method used to calculate the Margem Líquida index. """
     
         x1 = self.data.loc['3.11', self.listofyears]
         x2 = self.data.loc['3.01', self.listofyears]
@@ -166,6 +203,8 @@ class _Indicadores(Extractor):
         return self._ml_
 
     def _roa(self):
+        
+        """ Private method used to calculate the Rentabilidade do Ativo (ROA) index. """
     
         x1 = self.data.loc['3.11', self.listofyears]
         x2 = self.data.loc['1', self.listofyears]
@@ -175,6 +214,8 @@ class _Indicadores(Extractor):
         return self._roa_
 
     def _roe(self):
+        
+        """ Private method used to calculate the Rentabilidade do Patrimônio Líquido (ROE) index. """
     
         x1 = self.data.loc['3.11', self.listofyears]
         x2 = self.data.loc['2.03', self.listofyears]
@@ -190,7 +231,15 @@ class _Indicadores(Extractor):
 class Indicadores(_Indicadores):
     
     
+    """ Class used to aggregate the indexes into four categories.
+    
+    This class inherths all attributes and methods from the parent _Indicadores and grandparent Extractor classes.
+    """
+    
+    
     def __init__(self, filepath, s, e, anos):
+        
+        """ Initializes the class. """
       
         super().__init__(filepath, s, e, anos)
                           
@@ -198,21 +247,26 @@ class Indicadores(_Indicadores):
     
 
     def _to_df(self, idx, val):
+        
+        """ Helper method. 
+        
+        This helper method aggregates individual indexes in a DataFrame.
+        """
+        
+        df = pd.DataFrame(data = val, index = idx, columns = self.listofyears)
          
-         df = pd.DataFrame(data = val, index = idx, columns = self.listofyears)
-         
-         return df
+        return df
 
         
                     
     def estrutura_de_capital(self):
         
-        idx = ['Participação de Cappital de Terceiros', 
-               'Composição do Endividamento',
-               'Imobilização do Patrimônio Líquido',
-               'Capital Circulante Próprio',
-               'Capital Circulante Líquido',
-               'Imobilização de Recursos Não Correntes']
+        """ Method. 
+        
+        This method calculates and aggregates the indexes of the Estruturaa de Capital category in a pd.DataFrame.
+        """
+        
+        idx = utils.e_cap
     
 
         data = self._to_df( idx = idx, val = [self._pct(),
@@ -228,9 +282,12 @@ class Indicadores(_Indicadores):
     
     def liquidez(self):
         
-        idx = ['Liquidez Geral',
-               'Liquidez Corrente',
-               'Liquidez Seca']
+        """ Method. 
+        
+        This method calculates and aggregates the indexes of the Liquidez category in a pd.DataFrame.
+        """
+        
+        idx = utils.liq
         
         data = self._to_df( idx = idx, val = [self._lg(),
                                               self._lc(),
@@ -240,10 +297,12 @@ class Indicadores(_Indicadores):
 
     def prazos_medios(self):
         
-        idx = ['Prazo Médio de Recebimento de Vendas',
-               'Prazo Médio de Pagamento de Contas', 
-               'Prazo Médio de Renovação de Estoques',
-               'Giro do Estoque']
+        """ Method. 
+        
+        This method calculates and aggregates the indexes of the Prazos Médios category in a pd.DataFrame.
+        """
+        
+        idx = utils.p_med
 
         data = self._to_df (idx = idx, val = [self._pmrv(),
                                               self._pmpc(),
@@ -256,10 +315,12 @@ class Indicadores(_Indicadores):
     
     def rentabilidade(self):
         
-        idx = ['Giro do Ativo', 
-               'Margem Líquida',
-               'Rentabilidade do Ativo (ROA)',
-               'Rentabilidade do Patrimônio Líquido (ROE)']
+        """ Method. 
+        
+        This method calculates and aggregates the indexes of the Rentabilidade category in a pd.DataFrame.
+        """
+        
+        idx = utils.rent
 
 
         data = self._to_df(idx = idx, val = [self._ga(),
@@ -272,6 +333,11 @@ class Indicadores(_Indicadores):
     
 
     def todos(self):
+        
+        """ Method. 
+        
+        This method calculates and aggregates all the indexes in a pd.DataFrame.
+        """
         
         est = self.estrutura_de_capital()
         liq = self.liquidez()
