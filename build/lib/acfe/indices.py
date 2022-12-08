@@ -4,8 +4,8 @@ Created on Wed Nov 23 14:14:41 2022
 
 @author: Fernando Gioppato
 """
-from acfe.extracao import Extractor
-from acfe import utils
+from extracao import Extractor
+import utils
 import pandas as pd
 
 
