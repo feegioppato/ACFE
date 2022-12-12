@@ -150,8 +150,7 @@ class Extractor:
         self.structured_data = pd.DataFrame(self._string_data())
         self.structured_data.iloc[:, -3:] = self._data_convertion(self.structured_data.iloc[:, -3:])
         self.structured_data = self._column_names(self.structured_data)
-        self.structured_data = self.structured_data.set_index('cd')
-        
+        self.structured_data = self.structured_data.set_index('nc')    
         return self.structured_data
         
     
