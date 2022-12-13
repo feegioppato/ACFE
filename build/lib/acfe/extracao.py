@@ -140,19 +140,20 @@ class Extractor:
     def _data(self):
         
         """
-        Consolidates the data into an pd.DataFrame.
+        Consolidates data in a pd.DataFrame
         
         Returns
         -------
-        DataFrame containing tha data.
+        DataFrame containing the data
         """
         
-        self.structured_data = pd.DataFrame(self._string_data())
-        self.structured_data.iloc[:, -3:] = self._data_convertion(self.structured_data.iloc[:, -3:])
-        self.structured_data = self._column_names(self.structured_data)
-        self.structured_data = self.structured_data.set_index('cd')
+        structured_data = pd.DataFrame(self._string_data())
+        structured_data.iloc[:, -3:] = self._data_convertion(structured_data.iloc[:, -3:])
+        structured_data = self._column_names(structured_data)
+        structured_data['nc'] = structured_data['nc'].str.rstrip()
+        structured_data = structured_data.set_index('nc')
         
-        return self.structured_data
+        return structured_data
         
     
     def _column_names(self, x):
@@ -166,8 +167,8 @@ class Extractor:
         """
         
         return x.rename({'terceiro_ano' : self.listofyears[0],
-                        'segundo_ano' : self.listofyears[1],
-                        'primeiro_ano' : self.listofyears[2]},
+                         'segundo_ano' : self.listofyears[1],
+                         'primeiro_ano' : self.listofyears[2]},
                         axis = 1)    
             
         

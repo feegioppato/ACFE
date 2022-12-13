@@ -140,16 +140,17 @@ class Extractor:
     def _data(self):
         
         """
-        Consolidates the data into an pd.DataFrame.
+        Consolidates data in a pd.DataFrame
         
         Returns
         -------
-        DataFrame containing tha data.
+        DataFrame containing the data
         """
         
         structured_data = pd.DataFrame(self._string_data())
         structured_data.iloc[:, -3:] = self._data_convertion(structured_data.iloc[:, -3:])
         structured_data = self._column_names(structured_data)
+        structured_data['nc'] = structured_data['nc'].str.rstrip()
         structured_data = structured_data.set_index('nc')
         
         return structured_data

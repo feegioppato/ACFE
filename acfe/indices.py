@@ -4,14 +4,19 @@ Created on Wed Nov 23 14:14:41 2022
 
 @author: Fernando Gioppato
 """
+
 from acfe.extracao import Extractor
 from acfe import utils
 import pandas as pd
 
 
+
+
+
 class _Indicadores(Extractor):
     
     """ Helper class used to calculate each index individually. """
+    
         
     def __init__(self, filepath, s, e, anos):
         
@@ -19,22 +24,24 @@ class _Indicadores(Extractor):
         
         Inherits attributes from Extractor parent class and sets the 'data' attribute. """
         
-        Extractor.__init__(self, filepath, s, e, anos)
+        super().__init__(filepath, s, e, anos)
         self.data = self._data()
 
     
-# Estrutura de Capital
+    # Estrutura de Capital
+
     def _pct(self):
         
         """ Private method used to calculate the Participação de Capital de Terceiros index. """
         
         x1 = self.data.loc['Passivo Circulante', self.listofyears]
         x2 = self.data.loc['Passivo Não Circulante', self.listofyears]
-        x3 = self.data.loc['Patrimônio Líquido Consolidado', self.listofyears]
+        x3 = self.data.loc['Patrimônio Líquido', self.listofyears]
         
         self._pct_ = ( (x1+x2) / x3 ) * 100                                                                  
         
         return self._pct_
+    
     
     def _ce(self):
         
@@ -47,34 +54,37 @@ class _Indicadores(Extractor):
         
         return self._ce_
     
+    
     def _ipl(self):
         
         """ Private method used to calculate the Imobilização do Patrimônio Líquido index. """
     
         x1 = self.data.loc['Ativo Não Circulante', self.listofyears]
         x2 = self.data.loc['Ativo Realizável a Longo Prazo', self.listofyears]
-        x3 = self.data.loc['Patrimônio Líquido Consolidado', self.listofyears]
+        x3 = self.data.loc['Patrimônio Líquido', self.listofyears]
         
         self._ipl_ = ( (x1 - x2) / x3 ) * 100
         
         return self._ipl_
 
+
     def _ccp(self):
         
         """ Private method used to calculate the Capital Circulante Próprio index. """
     
-        x1 = self.data.loc['Patrimônio Líquido Consolidado', self.listofyears]
+        x1 = self.data.loc['Patrimônio Líquido', self.listofyears]
         x2 = self.data.loc['Ativo Não Circulante', self.listofyears]
         
         self._ccp_ = ( x1 - x2 )
     
         return self._ccp_
 
+
     def _ccl(self):
         
         """ Private method used to calculate the Capital Circulante Líquido index. """
     
-        x1 = self.data.loc['Patrimônio Líquido Consolidado', self.listofyears]
+        x1 = self.data.loc['Patrimônio Líquido', self.listofyears]
         x2 = self.data.loc['Passivo Não Circulante', self.listofyears]
         x3 = self.data.loc['Ativo Não Circulante', self.listofyears]
         
@@ -82,33 +92,36 @@ class _Indicadores(Extractor):
         
         return self._ccl_
 
+
     def _irnc(self):    
     
         """ Private method used to calculate the Imobilização de Recursos Não Correntes index. """    
     
         x1 = self.data.loc['Ativo Não Circulante', self.listofyears]
         x2 = self.data.loc['Ativo Realizável a Longo Prazo', self.listofyears]
-        x3 = self.data.loc['Patrimônio Líquido Consolidado', self.listofyears]
+        x3 = self.data.loc['Patrimônio Líquido', self.listofyears]
         x4 = self.data.loc['Passivo Não Circulante', self.listofyears]
         
         self._irnc_ = ( (x1 - x2) / (x3 + x4) ) * 100
         
         return self._irnc_
     
-
-    # Liquidez        
+    
+    # Liquidez
+    
     def _lg(self):
         
         """ Private method used to calculate the Liquidez Geral index. """
     
         x1 = self.data.loc['Ativo Circulante', self.listofyears]
-        x2 = self.data.loc['ativo Realizável a Longo Prazo', self.listofyears]
+        x2 = self.data.loc['Ativo Realizável a Longo Prazo', self.listofyears]
         x3 = self.data.loc['Passivo Circulante', self.listofyears]
         x4 = self.data.loc['Passivo Não Circulante', self.listofyears]
         
         self._lg_ = ( (x1 + x2) / (x3 + x4) ) * 100
         
         return self._lg_
+
 
     def _lc(self):
 
@@ -121,12 +134,14 @@ class _Indicadores(Extractor):
         
         return self._lc_
 
+
     def _ls(self):
 
         """ Private method used to calculate the Liquidez Seca index. """
     
         x1 = self.data.loc['Ativo Circulante', self.listofyears]
         x2 = self.data.loc['Estoques', self.listofyears]
+        x2 = x2[~x2.index.duplicated(keep = 'first')].iloc[0]
         x3 = self.data.loc['Passivo Circulante', self.listofyears]
         
         self._ls_ = ( (x1-x2) / x3) * 100
@@ -147,11 +162,13 @@ class _Indicadores(Extractor):
 
         return self._pmrv_
     
+    
     def _pmpc(self):
         
         """ Private method used to calculate the Prazo Médio de Pagamento de Contas index. """
     
         x1 = self.data.loc['Fornecedores', self.listofyears]
+        x1 = x1[~x1.index.duplicated(keep = 'first')].iloc[0]
         x2 = self.data.loc['Custo dos Bens e/ou Serviços Vendidos', self.listofyears] * -1
         x3 = self.data.loc['Estoques', self.listofyears]
         c1 = self.data.loc['Estoques', self.listofyears].shift(-1)
@@ -159,6 +176,7 @@ class _Indicadores(Extractor):
         self._pmpc_ = x1 / ( (x2-c1+x3)  / 360 )
         
         return self._pmpc_
+
 
     def _pmre(self):
         
@@ -170,6 +188,7 @@ class _Indicadores(Extractor):
         self._pmre_ = x1 / (x2 / 360)
         
         return self._pmre_
+
 
     def _ge(self):
         
@@ -193,34 +212,37 @@ class _Indicadores(Extractor):
         
         return self._ga_
 
+
     def _ml(self):
         
         """ Private method used to calculate the Margem Líquida index. """
     
-        x1 = self.data.loc['Lucro/Prejuízo Consolidado do Período', self.listofyears]
+        x1 = self.data.loc['Lucro/Prejuízo do Período', self.listofyears]
         x2 = self.data.loc['Receita de Venda de Bens e/ou Serviços', self.listofyears]
         self._ml_ = ( x1 / x2 ) * 100
                 
         return self._ml_
 
+
     def _roa(self):
         
         """ Private method used to calculate the Rentabilidade do Ativo (ROA) index. """
     
-        x1 = self.data.loc['Lucro/Prejuízo Consolidado do Período', self.listofyears]
+        x1 = self.data.loc['Lucro/Prejuízo do Período', self.listofyears]
         x2 = self.data.loc['Ativo Total', self.listofyears]
         self._roa_ = ( x1 / x2 ) * 100
 
         
         return self._roa_
 
+
     def _roe(self):
         
         """ Private method used to calculate the Rentabilidade do Patrimônio Líquido (ROE) index. """
     
-        x1 = self.data.loc['Lucro/Prejuízo Consolidado do Período', self.listofyears]
-        x2 = self.data.loc['Patrimônio Líquido Consolidado', self.listofyears]
-        c1 = self.data.loc['Patrimônio Líquido Consolidado', self.listofyears].shift(-1)
+        x1 = self.data.loc['Lucro/Prejuízo do Período', self.listofyears]
+        x2 = self.data.loc['Patrimônio Líquido', self.listofyears]
+        c1 = self.data.loc['Patrimônio Líquido', self.listofyears].shift(-1)
         
         self._roe_ = ( x1 / ( (x2 + c1) / 2 ) ) * 100
        
@@ -238,11 +260,11 @@ class Indicadores(_Indicadores):
     """
     
     
-    def __init__(self, filepath, s, e, anos):
+    #def __init__(self, filepath, s, e, anos):
         
-        """ Initializes the class. """
+        #""" Initializes the class. """
       
-        super().__init__(filepath, s, e, anos)
+        #super().__init__(filepath, s, e, anos)
                           
         
     
@@ -305,10 +327,10 @@ class Indicadores(_Indicadores):
         
         idx = utils.p_med
 
-        data = self._to_df (idx = idx, val = [self._pmrv(),
-                                              self._pmpc(),
-                                              self._pmre(),
-                                              self._ge()])
+        data = self._to_df(idx = idx, val = [self._pmrv(),
+                                             self._pmpc(),
+                                             self._pmre(),
+                                             self._ge()])
          
         return data
 
