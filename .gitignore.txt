@@ -3,5 +3,5 @@
 build/
 dist/
 acfe.egg-info/
-__pycache__/
+acfe/__pycache__/
 .ipynb_checkpoints/

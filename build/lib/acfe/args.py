@@ -7,6 +7,6 @@ Created on Thu Nov 24 09:58:09 2022
 
 
 filepath = 'Demonstrativos Ambev (2017, 2018, 2019).pdf'
-s = 'PÁGINA: 2 DE 137'
-e = 'PÁGINA: 9 DE 137'
+s = 'PÁGINA: 1 DE 182'
+e = 'PÁGINA: 7 DE 182'
 anos = ['2019', '2018', '2017']
