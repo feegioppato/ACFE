@@ -30,7 +30,7 @@ class _Indicadores(Extractor):
                 raise ValueError()
                 
         except:
-            print('Data does not contain all accounts, consider choosing another company to avoid erros')
+            print('Data does not contain all accounts, consider choosing another company to avoid erros.')
                 
 
     # Estrutura de Capital
