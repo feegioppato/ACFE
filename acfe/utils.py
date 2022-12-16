@@ -25,3 +25,18 @@ rent = ['Giro do Ativo',
         'Margem Líquida',
         'Rentabilidade do Ativo (ROA)',
         'Rentabilidade do Patrimônio Líquido (ROE)']
+
+cds = ['1',             # 0
+       '1.01',          # 1              
+       '1.01.02',       # 2
+       '1.01.03.01',    # 3
+       '1.01.04',       # 4
+       '1.02',          # 5
+       '1.02.01',       # 6
+       '2.01',          # 7
+       '2.01.02',       # 8
+       '2.02',          # 9
+       '2.03',          # 10
+       '3.01',          # 11
+       '3.02',          # 12
+       '3.11']          # 13

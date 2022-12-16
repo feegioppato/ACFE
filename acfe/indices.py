@@ -21,15 +21,26 @@ class _Indicadores(Extractor):
         
         Extractor.__init__(self, filepath, s, e, anos)
         self.data = self._data()
+        
+        try:
+            if self.data.index.isin(utils.cds) == True:
+                pass
+            
+            else:
+                raise ValueError()
+                
+        except:
+            print('Data does not contain all accounts, consider choosing another company to avoid erros')
+                
 
     # Estrutura de Capital
     def _pct(self):
         
         """ Private method used to calculate the Participação de Capital de Terceiros index. """
         
-        x1 = self.data.loc['2.01', self.listofyears]
-        x2 = self.data.loc['2.02', self.listofyears]
-        x3 = self.data.loc['2.03', self.listofyears]
+        x1 = self.data.loc[utils.cds[7], self.listofyears]
+        x2 = self.data.loc[utils.cds[9], self.listofyears]
+        x3 = self.data.loc[utils.cds[10], self.listofyears]
         
         self._pct_ = ( (x1+x2) / x3 ) * 100                                                                  
         
@@ -39,8 +50,8 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Composição do Endividamento index. """
         
-        x1 = self.data.loc['2.01', self.listofyears]
-        x2 = self.data.loc['2.02', self.listofyears]
+        x1 = self.data.loc[utils.cds[7], self.listofyears]
+        x2 = self.data.loc[utils.cds[9], self.listofyears]
         
         self._ce_ = ( x1 / (x1+x2) ) * 100
         
@@ -50,9 +61,9 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Imobilização do Patrimônio Líquido index. """
     
-        x1 = self.data.loc['1.02', self.listofyears]
-        x2 = self.data.loc['1.01.02', self.listofyears]
-        x3 = self.data.loc['2.03', self.listofyears]
+        x1 = self.data.loc[utils.cds[5], self.listofyears]
+        x2 = self.data.loc[utils.cds[2], self.listofyears]
+        x3 = self.data.loc[utils.cds[10], self.listofyears]
         
         self._ipl_ = ( (x1 - x2) / x3 ) * 100
         
@@ -62,8 +73,8 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Capital Circulante Próprio index. """
     
-        x1 = self.data.loc['2.03', self.listofyears]
-        x2 = self.data.loc['1.02', self.listofyears]
+        x1 = self.data.loc[utils.cds[10], self.listofyears]
+        x2 = self.data.loc[utils.cds[5], self.listofyears]
         
         self._ccp_ = ( x1 - x2 )
     
@@ -73,9 +84,9 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Capital Circulante Líquido index. """
     
-        x1 = self.data.loc['2.02', self.listofyears]
-        x2 = self.data.loc['2.03', self.listofyears]
-        x3 = self.data.loc['1.02', self.listofyears]
+        x1 = self.data.loc[utils.cds[9], self.listofyears]
+        x2 = self.data.loc[utils.cds[10], self.listofyears]
+        x3 = self.data.loc[utils.cds[5], self.listofyears]
         
         self._ccl_ = ( (x1 + x2) - x3 ) * 100
         
@@ -85,10 +96,10 @@ class _Indicadores(Extractor):
     
         """ Private method used to calculate the Imobilização de Recursos Não Correntes index. """    
     
-        x1 = self.data.loc['1.02', self.listofyears]
-        x2 = self.data.loc['1.02.01', self.listofyears]
-        x3 = self.data.loc['2.02', self.listofyears]
-        x4 = self.data.loc['2.03', self.listofyears]
+        x1 = self.data.loc[utils.cds[5], self.listofyears]
+        x2 = self.data.loc[utils.cds[2], self.listofyears]
+        x3 = self.data.loc[utils.cds[9], self.listofyears]
+        x4 = self.data.loc[utils.cds[10], self.listofyears]
         
         self._irnc_ = ( (x1 - x2) / (x3 + x4) ) * 100
         
@@ -100,10 +111,10 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Liquidez Geral index. """
     
-        x1 = self.data.loc['1.01', self.listofyears]
-        x2 = self.data.loc['1.02.01', self.listofyears]
-        x3 = self.data.loc['2.01', self.listofyears]
-        x4 = self.data.loc['2.02', self.listofyears]
+        x1 = self.data.loc[utils.cds[1], self.listofyears]
+        x2 = self.data.loc[utils.cds[2], self.listofyears]
+        x3 = self.data.loc[utils.cds[7], self.listofyears]
+        x4 = self.data.loc[utils.cds[9], self.listofyears]
         
         self._lg_ = ( (x1 + x2) / (x3 + x4) ) * 100
         
@@ -113,8 +124,8 @@ class _Indicadores(Extractor):
 
         """ Private method used to calculate the Liquidez Corrente index. """            
 
-        x1 = self.data.loc['1.01', self.listofyears]
-        x2 = self.data.loc['2.01', self.listofyears]
+        x1 = self.data.loc[utils.cds[2], self.listofyears]
+        x2 = self.data.loc[utils.cds[7], self.listofyears]
         
         self._lc_ = ( x1 / x2 ) * 100
         
@@ -124,9 +135,9 @@ class _Indicadores(Extractor):
 
         """ Private method used to calculate the Liquidez Seca index. """
     
-        x1 = self.data.loc['1.01', self.listofyears]
-        x2 = self.data.loc['1.01.04', self.listofyears]
-        x3 = self.data.loc['2.01', self.listofyears]
+        x1 = self.data.loc[utils.cds[2], self.listofyears]
+        x2 = self.data.loc[utils.cds[4], self.listofyears]
+        x3 = self.data.loc[utils.cds[7], self.listofyears]
         
         self._ls_ = ( (x1-x2) / x3) * 100
         
@@ -139,8 +150,8 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Prazo Médio de Recebimento de Vendas index. """
     
-        x1 = self.data.loc['1.01.03.01', self.listofyears]
-        x2 = self.data.loc['3.01', self.listofyears] / 360
+        x1 = self.data.loc[utils.cds[3], self.listofyears]
+        x2 = self.data.loc[utils.cds[11], self.listofyears] / 360
         
         self._pmrv_ = x1 / x2
 
@@ -150,10 +161,10 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Prazo Médio de Pagamento de Contas index. """
     
-        x1 = self.data.loc['2.01.02', self.listofyears]
-        x2 = self.data.loc['3.02', self.listofyears] * -1
-        x3 = self.data.loc['1.01.04', self.listofyears]
-        c1 = self.data.loc['1.01.04', self.listofyears].shift(-1)
+        x1 = self.data.loc[utils.cds[8], self.listofyears]
+        x2 = self.data.loc[utils.cds[12], self.listofyears] * -1
+        x3 = self.data.loc[utils.cds[4], self.listofyears]
+        c1 = self.data.loc[utils.cds[4], self.listofyears].shift(-1)
         
         self._pmpc_ = x1 / ( (x2-c1+x3)  / 360 )
         
@@ -163,8 +174,8 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Prazo Médio de Renovação dos Estoques index. """
     
-        x1 = self.data.loc['1.01.04', self.listofyears]
-        x2 = self.data.loc['3.02', self.listofyears] * -1
+        x1 = self.data.loc[utils.cds[4], self.listofyears]
+        x2 = self.data.loc[utils.cds[12], self.listofyears] * -1
         
         self._pmre_ = x1 / (x2 / 360)
         
@@ -185,7 +196,7 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Giro do Ativo index. """
     
-        x1 = self.data.loc['3.01', self.listofyears]
+        x1 = self.data.loc[utils.cds[11], self.listofyears]
         x2 = self.data.loc['1', self.listofyears]
         
         self._ga_ = ( x1 / x2 ) * 100
@@ -196,8 +207,8 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Margem Líquida index. """
     
-        x1 = self.data.loc['3.11', self.listofyears]
-        x2 = self.data.loc['3.01', self.listofyears]
+        x1 = self.data.loc[utils.cds[13], self.listofyears]
+        x2 = self.data.loc[utils.cds[11], self.listofyears]
         self._ml_ = ( x1 / x2 ) * 100
                 
         return self._ml_
@@ -206,8 +217,8 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Rentabilidade do Ativo (ROA) index. """
     
-        x1 = self.data.loc['3.11', self.listofyears]
-        x2 = self.data.loc['1', self.listofyears]
+        x1 = self.data.loc[utils.cds[13], self.listofyears]
+        x2 = self.data.loc[utils.cds[0], self.listofyears]
         self._roa_ = ( x1 / x2 ) * 100
 
         
@@ -217,9 +228,9 @@ class _Indicadores(Extractor):
         
         """ Private method used to calculate the Rentabilidade do Patrimônio Líquido (ROE) index. """
     
-        x1 = self.data.loc['3.11', self.listofyears]
-        x2 = self.data.loc['2.03', self.listofyears]
-        c1 = self.data.loc['2.03', self.listofyears].shift(-1)
+        x1 = self.data.loc[utils.cds[3], self.listofyears]
+        x2 = self.data.loc[utils.cds[10], self.listofyears]
+        c1 = self.data.loc[utils.cds[10], self.listofyears].shift(-1)
         
         self._roe_ = ( x1 / ( (x2 + c1) / 2 ) ) * 100
        
