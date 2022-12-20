@@ -22,6 +22,7 @@ class _Indicadores(Extractor):
         Extractor.__init__(self, filepath, s, e, anos)
         self.data = self._data()
         
+        
         try:
             if sum(self.data.index.isin(utils.cds)) == len(utils.cds):
                 pass
@@ -33,7 +34,8 @@ class _Indicadores(Extractor):
             print('Data does not contain all accounts, consider choosing another company to avoid erros.')
                 
 
-    # Estrutura de Capital
+    
+# Estrutura de Capital
     def _pct(self):
         
         """ Private method used to calculate the Participação de Capital de Terceiros index. """
