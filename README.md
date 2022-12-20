@@ -85,3 +85,7 @@ Contém o script necessário para realizar o cálculo dos índices. Cada módulo
 
 ### visualizacao.py
 Contém o script necessário para visualizar os índices.
+-> Funcionalidades:
+* listar os índices com seus códigos, que serão passados como argumento para a função de plotagem;
+* função responsável por chamar os plots
+
