@@ -147,11 +147,11 @@ class Extractor:
         DataFrame containing tha data.
         """
         
-        self.structured_data = pd.DataFrame(self._string_data())
-        self.structured_data.iloc[:, -3:] = self._data_convertion(self.structured_data.iloc[:, -3:])
-        self.structured_data = self._column_names(self.structured_data)
-        self.structured_data = self.structured_data.set_index('cd')    
-        return self.structured_data
+        structured_data = pd.DataFrame(self._string_data())
+        structured_data.iloc[:, -3:] = self._data_convertion(structured_data.iloc[:, -3:])
+        structured_data = self._column_names(structured_data)
+        structured_data = structured_data.set_index('cd')    
+        return structured_data
         
     
     def _column_names(self, x):

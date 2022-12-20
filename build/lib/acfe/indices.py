@@ -23,14 +23,14 @@ class _Indicadores(Extractor):
         self.data = self._data()
         
         try:
-            if self.data.index.isin(utils.cds) == True:
+            if sum(self.data.index.isin(utils.cds)) == len(utils.cds):
                 pass
             
             else:
                 raise ValueError()
                 
         except:
-            print('Data does not contain all accounts, consider choosing another company to avoid erros')
+            print('Data does not contain all accounts, consider choosing another company to avoid erros.')
                 
 
     # Estrutura de Capital

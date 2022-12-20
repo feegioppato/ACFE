@@ -23,7 +23,7 @@ class _Indicadores(Extractor):
         self.data = self._data()
         
         try:
-            if self.data.index.isin(utils.cds) == True:
+            if sum(self.data.index.isin(utils.cds)) == len(utils.cds):
                 pass
             
             else:
