@@ -6,3 +6,4 @@ Created on Tue Nov 22 13:27:10 2022
 """
 
 from acfe.indices import Indicadores
+import viz
