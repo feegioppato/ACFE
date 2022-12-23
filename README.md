@@ -87,6 +87,5 @@ Contém o script necessário para realizar o cálculo dos índices. Cada módulo
 Contém o script necessário para visualizar os índices.
 -> Funcionalidades:
 * `list_kpi()`: listar os índices com seus códigos, que serão passados como argumento para a função de plotagem;
-* `plot_kpi(data = kpi)`: função responsável por plotar o índice passado como argumento;
-* `plot_cat(data = cat)`: função responsável por plotar todos os índices da categoria passada como argumento.
+* `plot_kpi(data = kpi)`: função responsável por plotar os índices da categoria passada como argumento;
 
