@@ -30,7 +30,8 @@ class _Indicadores(Extractor):
                 raise ValueError()
                 
         except:
-            print('Data does not contain all accounts, consider choosing another company to avoid erros.')
+            missing = list(set(utils.cds) - set(self.data.index))
+            print(f'Warning: Data does not contain all accounts ({missing}), consider choosing another company to avoid erros.')
                 
 
     # Estrutura de Capital
@@ -118,7 +119,7 @@ class _Indicadores(Extractor):
         
         self._lg_ = ( (x1 + x2) / (x3 + x4) ) * 100
         
-        return self._lg_
+        return   self._lg_
 
     def _lc(self):
 
@@ -288,7 +289,7 @@ class Indicadores(_Indicadores):
                                               self._irnc()] )
 
         
-        return data
+        return round(data, 3)
         
     
     def liquidez(self):
@@ -304,7 +305,7 @@ class Indicadores(_Indicadores):
                                               self._lc(),
                                               self._ls()] )
         
-        return data
+        return round(data, 3)
 
     def prazos_medios(self):
         
@@ -320,7 +321,7 @@ class Indicadores(_Indicadores):
                                               self._pmre(),
                                               self._ge()])
          
-        return data
+        return round(data,3)
 
         
     
@@ -339,7 +340,7 @@ class Indicadores(_Indicadores):
                                              self._roa(),
                                              self._roe()])
         
-        return data
+        return round(data, 3)
 
     
 
@@ -357,4 +358,4 @@ class Indicadores(_Indicadores):
         
         data = pd.concat([est, liq, prm, rent], axis = 0)
         
-        return data
+        return round(data, 3)
